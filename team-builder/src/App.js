@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-
+import Form from './Form'
 
 //set up a Default memberList to add onto later
 const memberList = [{
@@ -12,7 +12,7 @@ const memberList = [{
 
 //set up Inital Form Values
 const initialFormValues = {
-  ///// TEXT INPUTS /////
+//Text inputs
   name: "",
   email: "",
   role: "",
@@ -24,8 +24,35 @@ function App() {
   //setting state to form values to be added to referencing to the initialFormValues
   const [formValues, setFormValues] = useState(initialFormValues);
   //THIS IS WHERE WE WILL BE ADDING THE CHANGE HANDLER
+
+  const onInputChange = (evt) => {
+    
+    const name = evt.target.name;
+    const value = evt.target.value;
+
+    //set a new state for the whole form
+  //   setFormValues({
+  //     ///copy over all the properties from formValues
+  //     ...formValues,
+  //     [name]: value,
+  //   });
+  // };
+
+
+
   return (
     <div className="App">
+      <header>
+      <h1>Team Builder</h1>
+      </header>
+      {/* rendering the list we currently have */}
+      {memberList.map((member) => {
+        return <div key={member.name}>{member.name}<br></br>{member.email}<br></br>{member.role}</div>;
+      })}
+
+      <Form  
+        values={formValues}
+        onInputChange={onInputChange}/>
 
     </div>
   );
